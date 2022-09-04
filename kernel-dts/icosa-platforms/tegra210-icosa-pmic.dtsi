@@ -34,20 +34,23 @@
 			regulator-name = "vdd-cpu";
 			regulator-min-microvolt = <618750>;
 			regulator-max-microvolt = <1400000>;
-			regulator-max-microamp = <15000000>;
+			regulator-max-microamp = <9000000>;
+			regulator-init-microvolt = <1000000>;
 			regulator-n-voltages = <126>;
 			regulator-ramp-delay = <12000>;
-			regulator-enable-ramp-delay = <150>;
+			regulator-enable-ramp-delay = <500>;
 			regulator-disable-ramp-delay = <60000>;
 			regulator-boot-on;
 			regulator-always-on;
 			#thermal-sensor-cells = <0>;
 			maxim,enable-active-discharge;
+			maxim,enable-falling-slew-rate;
+			maxim,enable-remote-sense;
 			maxim,externally-enable;
 			maxim,sleep-on-dvs;
 			maxim,dvs-default-state = <1>;
 			maxim,enable-gpio = <&max77620 5 0>;
-			junction-warn-millicelsius = <120>;
+			junction-warn-millicelsius = <120000>;
 		};
 
 		gpu_max77621_reg: max77621@1c {
@@ -60,16 +63,16 @@
 			regulator-max-microvolt = <1150000>;
 			regulator-max-microamp = <9000000>;
 			regulator-init-microvolt = <1000000>;
-			regulator-enable-ramp-delay = <200>;
-			regulator-disable-ramp-delay = <60000>;
-			regulator-boot-off;
 			regulator-ramp-delay = <12000>;
+			regulator-enable-ramp-delay = <500>;
+			regulator-disable-ramp-delay = <60000>;
 			#thermal-sensor-cells = <0>;
 			maxim,enable-active-discharge;
-			maxim,enable-bias-control;
+			maxim,enable-falling-slew-rate;
+			maxim,enable-remote-sense;
 			maxim,dvs-default-state = <1>;
 			maxim,enable-gpio = <&max77620 6 0>;
-			junction-warn-millicelsius = <120>;
+			junction-warn-millicelsius = <120000>;
 		};
 
 		max77620: max77620@3c {
