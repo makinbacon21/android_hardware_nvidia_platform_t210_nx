@@ -85,25 +85,25 @@
 			vin-supply = <&vdd_3v3>;
 		};
 
-		vdd_hdmi: regulator@6 {
+		vdd_hdmi: regulator@5 {
 			compatible = "regulator-fixed";
-			reg = <6>;
+			reg = <5>;
 			regulator-name = "vdd-hdmi";
 			regulator-min-microvolt = <5000000>;
 			regulator-max-microvolt = <5000000>;
 		};
 
-		en_vdd_cpu_fixed: regulator@7 {
+		en_vdd_cpu_fixed: regulator@6 {
 			compatible = "regulator-fixed";
-			reg = <7>;
+			reg = <6>;
 			regulator-name = "vdd-cpu-fixed";
 			regulator-min-microvolt = <1000000>;
 			regulator-max-microvolt = <1000000>;
 		};
 
-		v_pavdd_5v0: regulator@9 {
+		v_pavdd_5v0: regulator@7 {
 			compatible = "regulator-fixed-sync";
-			reg = <9>;
+			reg = <7>;
 			regulator-name = "v_pavdd_5v0";
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <1800000>;
@@ -113,9 +113,9 @@
 			regulator-enable-ramp-delay = <232>;
 		};
 
-		v_navdd_5v0: regulator@10 {
+		v_navdd_5v0: regulator@8 {
 			compatible = "regulator-fixed-sync";
-			reg = <10>;
+			reg = <8>;
 			regulator-name = "v_navdd_5v0";
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <1800000>;
@@ -125,9 +125,9 @@
 			regulator-enable-ramp-delay = <232>;
 		};
 
-		v_vdd50_a: regulator@11 {
+		v_vdd50_a: regulator@9 {
 			compatible = "regulator-fixed-sync";
-			reg = <11>;
+			reg = <9>;
 			regulator-name = "v_vdd50_a";
 			regulator-min-microvolt = <5000000>;
 			regulator-max-microvolt = <5000000>;
@@ -135,9 +135,9 @@
 			enable-active-high;
 		};
 
-		v_vdd50_b: regulator@12 {
+		v_vdd50_b: regulator@0xa {
 			compatible = "regulator-fixed-sync";
-			reg = <12>;
+			reg = <10>;
 			regulator-name = "v_vdd50_b";
 			regulator-min-microvolt = <5000000>;
 			regulator-max-microvolt = <5000000>;
@@ -145,9 +145,9 @@
 			enable-active-high;
 		};
 
-		vdd3v3_gc: regulator@13 {
+		vdd3v3_gc: regulator@0xc {
 			compatible = "regulator-fixed-sync";
-			reg = <13>;
+			reg = <12>;
 			regulator-name = "vdd3v3_gc";
 			regulator-min-microvolt = <3300000>;
 			regulator-max-microvolt = <3300000>;
@@ -159,9 +159,9 @@
 		};
 
 #if 0
-		vdd_wlreg_on: regulator@14 {
+		vdd_wlreg_on: regulator@0xd {
 			compatible = "regulator-fixed";
-			reg = <14>;
+			reg = <13>;
 			regulator-name = "vdd-wlreg_on";
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <1800000>;
@@ -172,9 +172,9 @@
 		};
 #endif
 
-		vdd_cdc_1v2_aud: regulator@15 {
+		vdd_cdc_1v2_aud: regulator@0xe {
 			compatible = "regulator-fixed-sync";
-			reg = <15>;
+			reg = <14>;
 			status = "disabled";
 			regulator-name = "vdd_cdc_1v2_aud";
 			regulator-min-microvolt = <1200000>;
@@ -183,18 +183,18 @@
 			startup-delay-us = <250000>;
 		};
 
-		en_vdd_jcl_chgr: regulator@16 {
+		en_vdd_jcl_chgr: regulator@0xf {
 			compatible = "regulator-fixed";
-			reg = <16>;
+			reg = <15>;
 			regulator-name = "left-joycon-charger";
 			gpio = <&gpio TEGRA_GPIO(CC, 3) GPIO_ACTIVE_HIGH>;
 			enable-active-high;
 			vin-supply = <&v_vdd50_a>;
 		};
 
-		en_vdd_jcr_chgr: regulator@17 {
+		en_vdd_jcr_chgr: regulator@0x10 {
 			compatible = "regulator-fixed";
-			reg = <17>;
+			reg = <16>;
 			regulator-name = "right-joycon-charger";
 			gpio = <&gpio TEGRA_GPIO(K, 3) GPIO_ACTIVE_HIGH>;
 			enable-active-high;

@@ -26,7 +26,7 @@
 			gpios = <
 				TEGRA_GPIO(E, 6) 1 /* Joycon (L) Wake Detect */
 				TEGRA_GPIO(X, 4) 0 /* Temperature Sensor (TMP451) Alert */
-				TEGRA_GPIO(X, 2) 1 /* Motion IRQ (Unused?) */
+				TEGRA_GPIO(X, 2) 1 /* Motion IRQ */
 				TEGRA_GPIO(X, 1) 0 /* Touchscreen (4CD60D) IRQ */
 				TEGRA_GPIO(X, 5) 0 /* Sleep Button 2 (Unused?) */
 				TEGRA_GPIO(X, 6) 0 /* Volume Up Button */

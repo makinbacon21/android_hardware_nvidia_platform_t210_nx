@@ -956,7 +956,7 @@
 				nvidia,enable-input = <TEGRA_PIN_ENABLE>;
 			};
 
-			/* Motion IRQ (Unused?) */
+			/* Motion IRQ */
 			motion_int_px2 {
 				nvidia,pins = "motion_int_px2";
 				nvidia,function = "rsvd0";
