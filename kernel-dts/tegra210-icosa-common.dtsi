@@ -686,6 +686,7 @@
 			realtek,external-microphone;
 			realtek,sel-jd-source = <4>;
 			realtek,jack-detect-is-jd1;
+			realtek,eq-config-type = <0>;
 		};
 
 		bm92t: bm92t@18 {
