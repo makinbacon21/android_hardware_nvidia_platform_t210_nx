@@ -150,7 +150,6 @@
 		status = "disabled";
 	};
 
-
 	sdhci@700b0400 { /* SDMMC3 Not Used */
 		status = "disabled";
 	};
@@ -227,9 +226,10 @@
 				regulator-supplies = "vdd-1v8-audio-hv", "vdd-1v8-audio-hv-bias";
 				vdd-1v8-audio-hv-supply = <&max77620_sd3>;
 				vdd-1v8-audio-hv-bias-supply = <&max77620_sd3>;
+				fsync-width = <31>;
 				status = "okay";
 			};
-	
+
 			i2s@702d1100 {
 				pinctrl-names = "dap_active", "dap_inactive";
 				pinctrl-0 = <>;
@@ -240,11 +240,23 @@
 				fsync-width = <0>;
 				status = "okay";
 			};
+
+			i2s@702d1200 {
+				status = "disabled";
+			};
+
+			i2s@702d1300 {
+				status = "disabled";
+			};
+
+			i2s@702d1400 {
+				status = "disabled";
+			};
 		};
+
 		adsp_audio {
 			status = "disabled";
 		};
-
 	};
 
 	pcie@1003000 {
@@ -414,8 +426,8 @@
 				307200	204000
 				403000	408000
 				710400	665600
-				921600 1600000
-			   1581000 2131200
+				921600	1600000
+				1581000	2131200
 			>;
 		};
 	};
@@ -471,7 +483,7 @@
 			status = "disabled";
 		};
 	};
-	
+
 	/delete-node/ psy_extcon_xudc;
 	/delete-node/ usb_cd@7009f000;
 
@@ -765,6 +777,7 @@
 			bitclock-noninversion;
 			frame-noninversion;
 			bit-format = "s16_le";
+			bclk-ratio = <0>;
 			srate = <48000>;
 			num-channel = <2>;
 			name-prefix = "x";
