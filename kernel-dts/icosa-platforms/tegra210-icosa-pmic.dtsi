@@ -380,6 +380,7 @@
 					maxim,ramp-rate-setting = <50000>;
 					regulator-ramp-delay = <50000>;
 				};
+			};
 
 			onoff {
 				maxim,onoff-keycode = <KEY_SLEEP>;
