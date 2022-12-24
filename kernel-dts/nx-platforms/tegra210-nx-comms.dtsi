@@ -15,15 +15,6 @@
 #include <dt-bindings/soc/tegra-pmc.h>
 
 / {
-	gpio@6000d000 {
-		wlan-default-input {
-			gpio-hog;
-			input;
-			gpios = <TEGRA_GPIO(H, 2) 1>;
-			label = "wlan-default-input-h2";
-		};
-	};
-
 	brcmfmac_pcie_wlan {
 		compatible = "brcm,bcm4356-fmac";
 		status = "okay";
