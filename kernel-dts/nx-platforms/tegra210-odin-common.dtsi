@@ -390,6 +390,7 @@
 						  1887000
 						  1989000
 						  2091000>;
+			preserve-across-suspend;
 		};
 
 		emc-scaling-data {
