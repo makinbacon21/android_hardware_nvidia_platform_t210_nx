@@ -37,7 +37,7 @@
 
 / {
 	model = "Nintendo Switch (2017)";
-	compatible = "nintendo,icosa", "nintendo,nx", "nvidia,tegra210";
+	compatible = "nvidia,odin", "nintendo,icosa", "nintendo,nx", "nvidia,tegra210";
 	nvidia,dtsfilename = __FILE__;
 
 	nvidia,boardids = "2595:0000:A0";
