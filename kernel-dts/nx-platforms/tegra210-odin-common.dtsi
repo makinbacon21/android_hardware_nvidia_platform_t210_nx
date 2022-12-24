@@ -71,10 +71,6 @@
 		};
 	};
 
-	dvfs {
-		compatible = "nvidia,tegra210-dvfs";
-	};
-
 	rtc {
 		nvidia,pmc-wakeup = <0>; // Disable wakeup alarms
 	};
@@ -417,6 +413,16 @@
 		status = "okay";
 	};
 
+	dvfs {
+		compatible = "nvidia,tegra210-dvfs";
+		/* Retail regulator: Max: 921600, Hard max 921600. */
+		nvidia,gpu-max-freq-khz = <921600>;
+	};
+
+	gpu-dvfs-rework {
+		status = "okay";
+	};
+
 	/* right joycon */
 	serial@70006040 {
 		status = "okay";
@@ -494,10 +500,6 @@
 	xotg {
 		#extcon-cells = <1>;
 		status = "disabled";
-	};
-
-	gpu-dvfs-rework {
-		status = "okay";
 	};
 
 	thermal_fan_est_shared_data: tfesd {
