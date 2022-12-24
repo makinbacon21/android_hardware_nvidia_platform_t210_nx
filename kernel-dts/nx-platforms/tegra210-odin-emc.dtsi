@@ -6,8 +6,6 @@
 	external-memory-controller@7001b000 {
 		status = "okay";
 		compatible = "nvidia,tegra21-emc", "nvidia,tegra210-emc";
-		nvidia,use-minerva-cc;
-		nvidia,use-smc-emc-tables;
 		reg = <0x0 0x7001b000 0x0 0x1000>,
 		      <0x0 0x7001e000 0x0 0x1000>,
 		      <0x0 0x7001f000 0x0 0x1000>;
@@ -23,6 +21,12 @@
 		clock-names = "emc", "pll_m", "pll_c", "pll_p", "clk_m",
 			"pll_mb", "pll_mb_ud", "pll_p_ud", "emc_override";
 		#thermal-sensor-cells = <0>;
+
+		nvidia,use-minerva-cc;
+		nvidia,use-smc-emc-tables;
+	};
+
+	external-memory-controller@7001b000 {
 		emc-table@40800 {
 			compatible = "nvidia,tegra21-emc-table";
 			nvidia,revision = <0x07>;
