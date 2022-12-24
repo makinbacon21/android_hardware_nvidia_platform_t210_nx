@@ -139,7 +139,6 @@
 		status = "disabled";
 	};
 
-
 	sdhci@700b0400 { /* SDMMC3 Not Used */
 		status = "disabled";
 	};
@@ -220,7 +219,7 @@
 				vdd-1v8-audio-hv-bias-supply = <&max77620_sd3>;
 				status = "okay";
 			};
-	
+
 			i2s@702d1100 {
 				pinctrl-names = "dap_active", "dap_inactive";
 				pinctrl-0 = <>;
@@ -260,10 +259,10 @@
 		nvidia,check-lane-timeout = <20>;
 
 		pci@1,0 {
-			phys =  <&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-1}>,
-					<&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-2}>,
-					<&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-3}>,
-					<&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-4}>;
+			phys =	<&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-1}>,
+				<&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-2}>,
+				<&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-3}>,
+				<&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-4}>; /* Referred to plat config */
 			phy-names = "pcie-0", "pcie-1", "pcie-2", "pcie-3";
 			nvidia,num-lanes = <4>;
 			status = "okay";
@@ -279,7 +278,7 @@
 
 	xusb_padctl@7009f000 {
 		status = "okay";
-		usb3-no-mapping-war = <0>; /* Enable if usb3 is disabled */
+		usb3-no-mapping-war = <0>; /* Enable if T210 and usb3 is disabled */
 
 		pads {
 			usb2 {
@@ -319,11 +318,11 @@
 						nvidia,function = "pcie-x4";
 						status = "okay";
 					};
-					/* XUSB */
 					pcie-5 {
 						nvidia,function = "xusb";
 						status = "okay";
 					};
+					/* USB3 port */
 					pcie-6 {
 						nvidia,function = "xusb";
 						status = "okay";
@@ -401,8 +400,8 @@
 				307200	204000
 				403000	408000
 				710400	665600
-				921600 1600000
-			   1581000 2131200
+				921600	1600000
+				1581000	2131200
 			>;
 		};
 	};
@@ -423,7 +422,7 @@
 		status = "okay";
 	};
 
-	/* right joycon */
+	/* Right Joycon */
 	serial@70006040 {
 		status = "okay";
 		nvidia,invert-txd;
@@ -435,11 +434,6 @@
 			compatible = "nintendo,joycon-serdev";
 			charger-supply = <&en_vdd_jcr_chgr>;
 		};
-	};
-
-	serial@70006300 {
-		dma-names = "tx";
-		status = "okay";
 	};
 
 	/* left joycon */
@@ -456,6 +450,11 @@
 		};
 	};
 
+	serial@70006300 {
+		dma-names = "tx";
+		status = "okay";
+	};
+
 	mailbox@70098000 {
 		status = "okay";
 	};
@@ -465,7 +464,7 @@
 			status = "disabled";
 		};
 	};
-	
+
 	/delete-node/ psy_extcon_xudc;
 	/delete-node/ usb_cd@7009f000;
 
@@ -479,8 +478,8 @@
 	xusb@70090000 {
 		status = "okay";
 		#extcon-cells = <1>;
-		phys = <&{/xusb_padctl@7009f000/pads/usb2/lanes/usb2-0}>,
-			   <&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-6}>;
+		phys =  <&{/xusb_padctl@7009f000/pads/usb2/lanes/usb2-0}>,
+			<&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-6}>;
 		phy-names = "usb2-0", "usb3-0";
 		extcon-cables = <&bm92t 0>;
 		extcon-cable-names = "id";
@@ -491,7 +490,7 @@
 		#extcon-cells = <1>;
 		status = "okay";
 		phys =  <&{/xusb_padctl@7009f000/pads/usb2/lanes/usb2-0}>,
-				<&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-6}>;
+			<&{/xusb_padctl@7009f000/pads/pcie/lanes/pcie-6}>;
 		phy-names = "usb2", "usb3";
 		extcon-cables = <&bm92t 1>;
 		extcon-cable-names = "vbus";
@@ -777,7 +776,6 @@
 					hysteresis = <1000>;
 					type = "active";
 				};
-
 			};
 			cooling-maps {
 				map0 {
@@ -1039,6 +1037,8 @@
 	};
 
 	nvpmodel {
+		/* clocks = <&tegra_car TEGRA210_CLK_EMC>; */
+		/* clock-names = "emc"; */
 		status = "okay";
 	};
 
