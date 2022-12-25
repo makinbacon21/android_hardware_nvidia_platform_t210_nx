@@ -38,7 +38,7 @@
 		status = "okay";
 	};
 
-	host1x {
+	host1x@50000000 {
 		/* tegradc.0: DSI */
 		dc@54200000 {
 			nvidia,emc-clk-rate = <300000000>;

@@ -65,7 +65,7 @@
 		};
 	};
 
-	host1x {
+	host1x@50000000 {
 		dsi {
 			nvidia,active-panel = <&panel_s_720p_7_0>;
 			prod-settings {
