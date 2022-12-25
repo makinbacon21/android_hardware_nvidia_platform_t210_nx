@@ -45,13 +45,13 @@
 	firmware {
 		android {
 			compatible = "android,firmware";
-			hardware = "nx-t210b01";
+			hardware = "nx";
 			fstab {
 				compatible = "android,fstab";
 				first_stage_delay = "1";
 				vendor {
 					compatible = "android,vendor";
-					dev = "/dev/block/platform/sdhci-tegra.0/by-name/vendor";
+					dev = "/dev/block/by-name/vendor";
 					type = "ext4";
 					mnt_flags = "ro,noatime";
 					fsmgr_flags = "wait";
