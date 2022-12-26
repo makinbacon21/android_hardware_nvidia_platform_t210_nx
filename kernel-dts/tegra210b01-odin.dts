@@ -24,7 +24,7 @@
 	nvidia,dtbbuildtime = __DATE__, __TIME__;
 
 	model = "Nintendo Switch (2019)";
-	compatible = "nvidia,modin", "nvidia,odin", "nintendo,iowa", "nintendo,nx", "nvidia,tegra210b01";
+	compatible = "nvidia,modin", "nintendo,iowa", "nintendo,nx", "nvidia,tegra210b01";
 
 	firmware {
 		android {
