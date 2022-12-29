@@ -24,6 +24,7 @@
 #include <tegra210-soc/tegra210-thermal-Tboard-Tdiode.dtsi>
 #include <dt-bindings/soc/tegra-pmc.h>
 #include <dt-bindings/thermal/tegra210b01-trips.h>
+#include <audio/tegra210-audio-dai-links.dtsi>
 
 / {
 	model = "Nintendo Switch (T210B01)";
@@ -296,6 +297,10 @@
 			status = "okay";
 		};
 
+		adsp_audio {
+			status = "disabled";
+		};
+
 		ahub {
 			i2s@702d1000 {
 				pinctrl-names = "dap_active", "dap_inactive";
@@ -304,7 +309,6 @@
 				regulator-supplies = "vdd-1v8-audio-hv", "vdd-1v8-audio-hv-bias";
 				vdd-1v8-audio-hv-supply = <&max77620_sd3>;
 				vdd-1v8-audio-hv-bias-supply = <&max77620_sd3>;
-				fsync-width = <31>;
 				status = "okay";
 			};
 
@@ -315,25 +319,18 @@
 				regulator-supplies = "vdd-1v8-spi-hv", "vdd-1v8-spi-hv-bias";
 				vdd-1v8-spi-hv-supply = <&max77620_sd3>;
 				vdd-1v8-spi-hv-bias-supply = <&max77620_sd3>;
-				fsync-width = <0>;
+				bclk-ratio = <4>;
 				status = "okay";
 			};
-
-			i2s@702d1200 {
-				status = "disabled";
+			i2s@702d1100 {
+				pinctrl-names = "dap_active", "dap_inactive";
+				pinctrl-0 = <>;
+				pinctrl-1 = <>;
+				regulator-supplies = "vdd-1v8-spi-hv", "vdd-1v8-spi-hv-bias";
+				vdd-1v8-spi-hv-supply = <&max77620_sd3>;
+				vdd-1v8-spi-hv-bias-supply = <&max77620_sd3>;
+				fsync-width = <0>;
 			};
-
-			i2s@702d1300 {
-				status = "disabled";
-			};
-
-			i2s@702d1400 {
-				status = "disabled";
-			};
-		};
-
-		adsp_audio {
-			status = "disabled";
 		};
 	};
 
@@ -885,12 +882,14 @@
 			realtek,sel-jd-source = <4>;
 			realtek,jack-detect-is-jd1;
 			realtek,eq-config-type = <0>;
+
+            #sound-dai-cells = <1>;
 		};
 	};
 
 	tegra_sound: sound {
-		compatible = "nvidia,tegra-audio-t210ref-mobile-rt5640";
-		nvidia,model = "tegra-snd-t210ref-mobile-rt565x";
+		compatible = "nvidia,tegra210-ape-rt5640";
+		nvidia-audio-card,name = "Nintendo Switch APE";
 
 		clocks = <&tegra_car TEGRA210_CLK_PLL_P_OUT1>,
 						<&tegra_car TEGRA210_CLK_PLL_A>,
@@ -909,61 +908,22 @@
 		assigned-clock-rates = <368640000>, <36864000>,
 			<36864000>, <12288000>;
 
-		nvidia,num-codec-link = <2>;
-
-		nvidia,audio-routing =
-			"x Headphone Jack",	"x HPOL",
-			"x Headphone Jack",	"x HPOR",
-			"x Int Spk",		"x SPORP",
-			"x Int Spk",		"x SPORN",
-			"x Int Spk",		"x SPOLP",
-			"x Int Spk",		"x SPOLN",
+		nvidia-audio-card,routing =
+			"x Headphone Jack", 	"x HPOL",
+			"x Headphone Jack", 	"x HPOR",
+			"x Int Spk", 	"x SPORP",
+			"x Int Spk", 	"x SPORN",
+			"x Int Spk", 	"x SPOLP",
+			"x Int Spk", 	"x SPOLN",
 			"x IN1P",		"x Mic Jack",
-			"x IN1P",		"x Mic Jack",
-			"y Headphone",		"y OUT",
-			"y IN",			"y Mic";
+			"x IN1P",		"x Mic Jack";
 
-		nvidia,xbar = <&tegra_axbar>;
+		nvidia-audio-card,widgets =
+			"Headphone",	"x Headphone Jack",
+			"Microphone",	"x Mic Jack",
+			"Speaker",		"x Int Spk";
 
-		mclk-fs = <256>;
-
-		/* RT5639 I2S1 */
-		nvidia,dai-link-1 {
-			link-name = "rt565x-playback";
-			cpu-dai = <&tegra_i2s1>;
-			codec-dai = <&rt5639>;
-			cpu-dai-name = "I2S1";
-			codec-dai-name = "rt5640-aif1";
-			format = "i2s";
-			bitclock-slave;
-			frame-slave;
-			bitclock-noninversion;
-			frame-noninversion;
-			bit-format = "s16_le";
-			bclk-ratio = <0>;
-			srate = <48000>;
-			num-channel = <2>;
-			name-prefix = "x";
-		};
-
-		/* BCM4356-BT PCM */
-		nvidia,dai-link-2 {
-			link-name = "spdif-dit-1";
-			cpu-dai = <&tegra_i2s2>;
-			codec-dai = <&spdif_dit1>;
-			cpu-dai-name = "I2S2";
-			codec-dai-name = "dit-hifi";
-			format = "dsp_a";
-			bitclock-slave;
-			frame-slave;
-			bitclock-inversion;
-			frame-noninversion;
-			bit-format = "s16_le";
-			bclk-ratio = <4>;
-			srate = <8000>;
-			num-channel = <1>;
-			name-prefix = "y";
-		};
+		nvidia-audio-card,mclk-fs = <256>;
 	};
 
 	modem {
@@ -1375,4 +1335,17 @@
 		clock-names = "cap-clk";
 		status = "disabled";
 	};
+};
+
+&i2s1_to_codec {
+	link-name = "rt565x-playback";
+	codec { 
+		sound-dai = <&rt5639 0>;
+		prefix = "x";
+	};
+};
+
+&i2s2_to_codec {
+	format = "dsp_a";
+	bitclock-inversion;
 };
