@@ -106,7 +106,7 @@
 				nvidia,panel-rst-gpio = <&gpio TEGRA_GPIO(V, 2) 0>; /* PV2 */
 				nvidia,panel-irq-gpio = <&gpio TEGRA_GPIO(H, 0) 0>; /* WIFI_EN_PH0 */
 				disp-default-out {
-					nvidia,out-rotation = <270>;
+					nvidia,out-rotation = <0>; // WAR: handled by surfaceflinger
 				};
 			};
 		};
