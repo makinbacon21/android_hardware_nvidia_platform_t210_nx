@@ -463,7 +463,7 @@
 				ti,temp-polling-time-sec = <20>;
 				ti,pre-to-fast-charge-voltage-millivolt = <3000>;
 				ti,enable-full-plug-detection;
-				/* ti,disable-suspend-on-charging; */
+				ti,disable-suspend-on-charging;
 				ti,watchdog-timeout = <0>; /* Disable OTG/Charging Watchdog */
 				ti,no-otg-watchdog;
 			};
