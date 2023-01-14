@@ -409,7 +409,7 @@
 			};
 
 			onoff {
-				maxim,onoff-keycode = <KEY_SLEEP>;
+				maxim,onoff-keycode = <KEY_POWER>;
 			};
 		};
 
