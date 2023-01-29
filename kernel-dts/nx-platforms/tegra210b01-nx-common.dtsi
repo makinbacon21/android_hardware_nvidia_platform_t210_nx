@@ -530,6 +530,13 @@
 		};
 	};
 
+    tegra_wdt: watchdog@60005100 {
+		dt-override-status-odm-data = <0x00010000 0x00010000>;
+		timeout-sec = <120>;
+		status = "okay";
+	};
+
+
 	dvfs {
 		compatible = "nvidia,tegra210b01-dvfs", "nvidia,tegra210-dvfs";
 		/*
