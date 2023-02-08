@@ -1049,18 +1049,80 @@
 				 <&tegra_clk_dfll>;
 			clock-names = "cpu_g", "cpu_lp", "pll_x", "pll_p", "dfll";
 			clock-latency = <300000>;
+            cpu-idle-states = <&CC6 &CC7 &SC2 &SC3 &SC4 &SC7>;
 		};
 
 		cpu@1 {
 			compatible = "arm,cortex-a57", "arm,armv8";
+            cpu-idle-states = <&CC6 &CC7 &SC2 &SC3 &SC4 &SC7>;
 		};
 
 		cpu@2 {
 			compatible = "arm,cortex-a57", "arm,armv8";
+            cpu-idle-states = <&CC6 &CC7 &SC2 &SC3 &SC4 &SC7>;
 		};
 
 		cpu@3 {
 			compatible = "arm,cortex-a57", "arm,armv8";
+            cpu-idle-states = <&CC6 &CC7 &SC2 &SC3 &SC4 &SC7>;
+		};
+
+        idle-states {
+			entry-method = "psci";
+
+			CC6: cc6 {
+				compatible = "arm,idle-state";
+				arm,psci-suspend-param = <0x40000010>;
+				wakeup-latency-us = <230>;
+				min-residency-us = <10000>;
+				idle-state-name = "cc6-cluster-powergated";
+				status = "okay";
+			};
+
+			CC7: cc7 {
+				compatible = "arm,idle-state";
+				arm,psci-suspend-param = <0x40000011>;
+				wakeup-latency-us = <500>;
+				min-residency-us = <1000>;
+				idle-state-name = "cc7-cluster-railgated";
+				status = "okay";
+			};
+
+			SC2: sc2 {
+				compatible = "arm,idle-state";
+				arm,psci-suspend-param = <0x40000007>;
+				wakeup-latency-us = <600>;
+				min-residency-us = <1500>;
+				idle-state-name = "sc2-dram-sr-mc-cg";
+				status = "okay";
+			};
+
+			SC3: sc3 {
+				compatible = "arm,idle-state";
+				arm,psci-suspend-param = <0x40000007>;
+				wakeup-latency-us = <700>;
+				min-residency-us = <1600>;
+				idle-state-name = "sc3-dram-sr-mc-cg-mempll-disabled";
+				status = "okay";
+			};
+
+			SC4: sc4 {
+				compatible = "arm,idle-state";
+				arm,psci-suspend-param = <0x40000007>;
+				wakeup-latency-us = <3000>;
+				min-residency-us = <5000>;
+				idle-state-name = "sc4-dram-sr-mc-cg-mempll-pllp-disabled";
+				status = "okay";
+			};
+
+			SC7: sc7 {
+				compatible = "arm,idle-state";
+				arm,psci-suspend-param = <0x4000001B>;
+				wakeup-latency-us = <5000>;
+				min-residency-us = <10000>;
+				idle-state-name = "sc7-vdd-soc-off";
+				status = "disabled";
+			};
 		};
 	};
 
