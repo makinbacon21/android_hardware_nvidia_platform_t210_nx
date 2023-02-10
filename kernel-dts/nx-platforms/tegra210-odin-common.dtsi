@@ -72,7 +72,8 @@
 	};
 
 	rtc {
-		nvidia,pmc-wakeup = <0>; // Disable wakeup alarms
+		nvidia,pmc-wakeup = <&tegra_pmc PMC_WAKE_TYPE_EVENT 16
+			PMC_TRIGGER_TYPE_HIGH>;
 	};
 
 	tegra_fiq_debugger {
