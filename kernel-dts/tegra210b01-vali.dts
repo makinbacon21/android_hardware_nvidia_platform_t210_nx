@@ -85,10 +85,8 @@
 		};
 	};
 
-	/* Do not actually disable, for having /sys/class/switch/dp/state. */
 	host1x@50000000 {
 		/* tegradc.1: DP */
-		/*
 		dc@54240000 {
 			status = "disabled";
 		};
@@ -100,7 +98,6 @@
 		dpaux1 {
 			status = "disabled";
 		};
-		*/
 
 		dsi {
 			prod-settings {
