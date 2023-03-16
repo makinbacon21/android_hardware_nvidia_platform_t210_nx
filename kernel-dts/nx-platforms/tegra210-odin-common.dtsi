@@ -1132,7 +1132,7 @@
 				wakeup-latency-us = <5000>;
 				min-residency-us = <10000>;
 				idle-state-name = "sc7-vdd-soc-off";
-				status = "disabled";
+				status = "okay";
 			};
 		};
 	};
